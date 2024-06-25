@@ -19,14 +19,15 @@ window.addEventListener('load', function() {
         let defaultOption = document.createElement("option");
         defaultOption.value = "";
         defaultOption.text = "Seleccione un paciente";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
         select.appendChild(defaultOption);
 
         // Añadir opciones del paciente
         pacientes.forEach(paciente => {
             let option = document.createElement("option");
             option.value = paciente.id;
-            //falta domicilio==============================
-            option.text = `${paciente.nombre} ${paciente.apellido}, ${paciente.cedula}, ${paciente.fechaIngreso}, ${paciente.email}`;
+            option.text = `${paciente.nombre} ${paciente.apellido}, ${paciente.cedula}`;
             select.appendChild(option);
         });
     }

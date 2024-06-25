@@ -3,7 +3,6 @@ package com.example.ClinicaOdontologicaBackend.controller;
 import com.example.ClinicaOdontologicaBackend.entity.Odontologo;
 import com.example.ClinicaOdontologicaBackend.entity.Paciente;
 import com.example.ClinicaOdontologicaBackend.exception.ResourceNotFoundException;
-import com.example.ClinicaOdontologicaBackend.service.DomicilioService;
 import com.example.ClinicaOdontologicaBackend.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
