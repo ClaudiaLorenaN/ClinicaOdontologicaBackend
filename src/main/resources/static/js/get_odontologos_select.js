@@ -18,14 +18,16 @@ window.addEventListener('load', function() {
         // Añadir una opción por defecto
         let defaultOption = document.createElement("option");
         defaultOption.value = "";
-        defaultOption.text = "Seleccione un odontologo";
+        defaultOption.text = "Seleccione un odontólogo";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
         select.appendChild(defaultOption);
 
-        // Añadir opciones del domicilio
+        // Añadir opciones del odontologo
         odontologos.forEach(odontologo => {
             let option = document.createElement("option");
             option.value = odontologo.id;
-            option.text = `${odontologo.matricula} ${odontologo.nombre}, ${odontologo.apellido}`;
+            option.text = `${odontologo.nombre} ${odontologo.apellido}`;
             select.appendChild(option);
         });
     }

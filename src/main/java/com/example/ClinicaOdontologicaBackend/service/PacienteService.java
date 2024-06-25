@@ -2,7 +2,6 @@ package com.example.ClinicaOdontologicaBackend.service;
 
 import com.example.ClinicaOdontologicaBackend.entity.Domicilio;
 import com.example.ClinicaOdontologicaBackend.entity.Paciente;
-import com.example.ClinicaOdontologicaBackend.repository.DomicilioRepository;
 import com.example.ClinicaOdontologicaBackend.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +12,9 @@ import java.util.Optional;
 public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
-    @Autowired
-    private DomicilioRepository domicilioRepository;
 
     public Paciente guardarPaciente(Paciente paciente){
-        Optional<Domicilio> domicilio = domicilioRepository.findById(paciente.getDomicilio().getId());
-        if (domicilio.isPresent()) {
-            paciente.setDomicilio(domicilio.get());
-            return pacienteRepository.save(paciente);
-        }else{
-            return null;
-        }
-
+        return pacienteRepository.save(paciente);
     }
     public Optional<Paciente> buscarPorId(Long id){
         return pacienteRepository.findById(id);
@@ -33,11 +23,7 @@ public class PacienteService {
         return pacienteRepository.findByEmail(email);
     }
     public void actualizarPaciente(Paciente paciente){
-        Optional<Domicilio> domicilio = domicilioRepository.findById(paciente.getDomicilio().getId());
-        if (domicilio.isPresent()) {
-            paciente.setDomicilio(domicilio.get());
             pacienteRepository.save(paciente);
-        }
     }
     public void eliminarPaciente(Long id){
         pacienteRepository.deleteById(id);
