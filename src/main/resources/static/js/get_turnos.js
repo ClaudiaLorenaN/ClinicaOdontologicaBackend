@@ -45,12 +45,12 @@ let paciente;
       .then(response => response.json())
       .then(data => {
       //recorremos la colección de turnos del JSON
-         for(turno of data){
+         for(let turno of data){
             //por cada turno armaremos una fila de la tabla
             //cada fila tendrá un id que luego nos permitirá borrar la fila si eliminamos el turno
             //var table = document.getElementById("turnoTable");
             var table = document.getElementById("turnoTable");
-            var turnoRow =table.insertRow();
+            let turnoRow =table.insertRow();
             let tr_id = turno.id;
             turnoRow.id = tr_id;
 

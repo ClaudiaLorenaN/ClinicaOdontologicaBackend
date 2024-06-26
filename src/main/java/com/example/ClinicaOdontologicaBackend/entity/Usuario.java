@@ -1,3 +1,4 @@
+
 package com.example.ClinicaOdontologicaBackend.entity;
 
 import jakarta.persistence.*;

@@ -33,13 +33,22 @@ public class TurnoController {
         Optional<Paciente> pacienteBuscado= pacienteService.buscarPorId(turno.getPaciente().getId());
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorId(turno.getOdontologo().getId());
 
-        if(pacienteBuscado.isPresent()&&odontologoBuscado.isPresent()){
-            turno.setPaciente(pacienteBuscado.get());
-            turno.setOdontologo(odontologoBuscado.get());
-            return ResponseEntity.ok(turnoService.registrarTurno(turno));
-        }else{
-            throw new BadRequestException ("paciente o odontologo no encontrado");
+        if (!pacienteBuscado.isPresent()) {
+            throw new BadRequestException("Paciente no encontrado");
         }
+
+        if (!odontologoBuscado.isPresent()) {
+            throw new BadRequestException("Odontólogo no encontrado");
+        }
+
+        if(turno.getFecha() == null){
+            throw new BadRequestException("Fecha no valida");
+
+        }
+        turno.setPaciente(pacienteBuscado.get());
+        turno.setOdontologo(odontologoBuscado.get());
+        return ResponseEntity.ok(turnoService.registrarTurno(turno));
+
     }
     @PutMapping
     public ResponseEntity<String> actualizarTurno(@RequestBody TurnoDTO turno) throws ResourceNotFoundException{
@@ -53,8 +62,13 @@ public class TurnoController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Optional<TurnoDTO>> buscarPorId(@PathVariable Long id){
-        return ResponseEntity.ok(turnoService.buscarPorId(id));
+    public ResponseEntity<Optional<TurnoDTO>> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException{
+        Optional<TurnoDTO> turnoEncontrado = turnoService.buscarPorId(id);
+        if(turnoEncontrado.isPresent()){
+            return ResponseEntity.ok(turnoEncontrado);
+        }else{
+            throw new ResourceNotFoundException("Turno no encontrado");
+        }
     }
 
     @GetMapping
